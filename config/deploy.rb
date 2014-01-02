@@ -5,6 +5,7 @@ set :branch, 'testbr'
 
 set :deploy_to, '/home/vagrant/railstut'
 set :scm, :git
+set :deploy_via, :remote_cache
 
 # set :format, :pretty
 # set :log_level, :debug
