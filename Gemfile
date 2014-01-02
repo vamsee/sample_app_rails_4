@@ -11,6 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
+  gem 'capistrano', '~> 3.0.1'
 end
 
 gem 'sass-rails', '4.0.1'
