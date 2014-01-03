@@ -22,7 +22,13 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "echo 'OHAI #{release_timestamp}'"
+      execute "echo 'CREATING RELEASE **** #{release_timestamp} ****'"
+      execute "ln -s /home/vagrant/railstut/current /vagrant/railstut/current"
+      execute "cd /vagrant/railstut && docker build -t release_#{release_timestamp} ."
+      [10004, 10003, 10002, 10001].each do |port|
+        execute "$(docker ps | grep web_#{port}) && docker stop web_#{port}"
+        execute "docker run -d -p #{port}:9292 -name web_#{port} release_#{release_timestamp}"
+      end
     end
   end
 
